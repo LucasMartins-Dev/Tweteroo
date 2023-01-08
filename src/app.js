@@ -14,19 +14,17 @@ const usuarios = []
 app.post("/sign-up",(req,res)=>{
 const usuario = req.body
 usuarios.push(usuario)
-console.log(usuarios)
 res.send("ok")
 })
 
 app.post("/tweets",(req,res)=>{
-    const tweet ={username: req.headers.user,avatar: usuarios[0].avatar ,tweet: req.body.tweet}
-    
-    if(usuarios.find(usu => usu.username == tweet.username)){
+    const tweet = req.headers
+    if(usuarios.find(usu => usu.username == tweet.user)){
         tweteroos.push(tweet)
         res.send("ok")
-      console.log(tweteroos)
+      console.log(1)
     }else{
-        
+        console.log(2)
         res.send("UNAUTHORIZED")
     }
 })
