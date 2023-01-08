@@ -1,14 +1,12 @@
-import express, {json} from "express";
+import express  from "express";
 import cors from "cors";
 
 const app = express()
 app.use(express.json())
 app.use(cors())
-app.use(json())
 
 const tweteroos = []
 const usuarios = []
-
 
 
 app.post("/sign-up",(req,res)=>{
@@ -18,13 +16,11 @@ res.send("ok")
 })
 
 app.post("/tweets",(req,res)=>{
-    const tweet = req.headers
-    if(usuarios.find(usu => usu.username == tweet.user)){
+    const tweet = req.body
+    if(usuarios.find(usu => usu.username === tweet.username)){
         tweteroos.push(tweet)
         res.send("ok")
-      console.log(1)
     }else{
-        console.log(2)
         res.send("UNAUTHORIZED")
     }
 })
@@ -43,7 +39,6 @@ app.get("/tweets",(req,res)=>{
         return {username:d.username , avatar:usuario.avatar , tweet:d.tweet}
         })
     res.send(avatar)
-    
 })
 
 app.listen(5000,()=>console.log("ta funfando"))
